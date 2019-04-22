@@ -10,4 +10,4 @@ docker  run --rm -it \
     		--shm-size='1G' \
     		-e PYTHONUNBUFFERED='1' \
                 --net=host \
-			new_flask bash
+			scrap_foto bash
