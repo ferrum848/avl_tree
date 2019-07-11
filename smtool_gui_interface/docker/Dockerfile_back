@@ -1,0 +1,46 @@
+FROM nvidia/cuda:9.0-cudnn7-runtime-ubuntu16.04
+
+ENV DEBIAN_FRONTEND noninteractive
+
+#########################################
+# common
+#########################################
+
+RUN apt-get update && \
+    apt-get install -y build-essential git nano curl wget software-properties-common
+
+
+#########################################
+# conda
+#########################################
+
+RUN \
+    cd /opt && \
+    wget -q https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86_64.sh
+RUN \
+    cd /opt && \
+    chmod +x Anaconda-2.3.0-Linux-x86_64.sh && \
+    /bin/bash Anaconda-2.3.0-Linux-x86_64.sh -b
+ENV ANACONDA_ROOT=/root/anaconda
+# works only when running dockerfile
+ENV PATH=$ANACONDA_ROOT/bin:$PATH
+
+RUN \
+    conda install -y pip opencv scikit-image
+
+RUN CONDA_SSL_VERIFY=false conda update -y pyopenssl
+
+RUN ln /dev/null /dev/raw1394 && \
+    ldconfig
+
+RUN echo "export PATH=$ANACONDA_ROOT/bin:$PATH" | tee -a ~/.bashrc
+ENV LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/lib:$ANACONDA_ROOT/lib:$LD_LIBRARY_PATH
+
+ENV QT_X11_NO_MITSHM=1
+
+RUN apt-get update
+RUN apt-get -y install qt4-qmake libqt4-dev
+RUN conda install -y pyqt=4.11
+RUN apt-get -y install qtcreator
+
+WORKDIR /src

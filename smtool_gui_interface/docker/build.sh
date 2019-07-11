@@ -1,0 +1,1 @@
+nvidia-docker build -t smtool_gui .
