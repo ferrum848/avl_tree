@@ -1,0 +1,34 @@
+bpy.ops.object.modifier_add(type='SIMPLE_DEFORM')
+​
+bpy.context.object.modifiers["SimpleDeform"].angle = float
+​
+bpy.context.object.modifiers["SimpleDeform"].deform_method = 'TWIST'
+​
+bpy.context.object.modifiers["SimpleDeform"].deform_axis = 'X'
+​
+​
+​
+bpy.context.object.modifiers["SimpleDeform"].lock_x = False
+​
+bpy.context.object.modifiers["SimpleDeform"].lock_y = False
+​
+bpy.context.object.modifiers["SimpleDeform"].lock_z = False
+
+psys = bpy.context.object.modifiers["ParticleSettings"]
+psys = psys.particle_system
+psys.settings.brownian_factor = 1
+
+
+import bpy, random
+phase = random.uniform(0, 2)
+size = random.uniform(0.15, 1)
+number = random.randint(7, 15)
+obj = bpy.context.object.modifiers["ParticleSettings"].particle_system
+obj.settings.count = number
+obj.settings.phase_factor_random = phase
+obj.settings.size_random = size
+
+
+bpy.data.objects['Plane'].particle_systems["wood"]
+list(bpy.data.objects['Plane'].particle_systems)
+
