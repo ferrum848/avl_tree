@@ -1,0 +1,63 @@
+import bpy, random
+
+wood = bpy.data.objects['Plane'].particle_systems["wood"]
+cone = bpy.data.objects['Plane'].particle_systems["cone"]
+leaves = bpy.data.objects['Plane'].particle_systems["3_leaf"]
+leaves2 = bpy.data.objects['Plane'].particle_systems["3_leaf2"]
+wood2 = bpy.data.objects['Plane'].particle_systems["wood2"]
+wood_small = bpy.data.objects['Plane'].particle_systems["wood_small"]
+
+wood_phase = random.uniform(0, 2)
+wood_size = random.uniform(0.15, 1)
+wood_number = random.randint(15, 30)
+
+cone_phase = random.uniform(0, 2)
+cone_size = random.uniform(0.15, 1)
+cone_number = random.randint(2, 7)
+
+leaves_phase = random.uniform(0, 2)
+leaves_size = random.uniform(0.15, 1)
+leaves_number = random.randint(8, 15)
+
+leaves2_phase = random.uniform(0, 2)
+leaves2_size = random.uniform(0.15, 1)
+leaves2_number = random.randint(8, 15)
+
+wood2_phase = random.uniform(0, 2)
+wood2_size = random.uniform(0.15, 1)
+wood2_number = random.randint(7, 15)
+
+wood_small_phase = random.uniform(0, 2)
+wood_small_size = random.uniform(0.15, 1)
+wood_small_number = random.randint(150, 300)
+#======================================================
+wood.settings.count = wood_number
+wood.settings.phase_factor_random = wood_phase
+wood.settings.size_random = wood_size
+
+cone.settings.count = cone_number
+cone.settings.phase_factor_random = cone_phase
+cone.settings.size_random = cone_size
+
+leaves.settings.count = leaves_number
+leaves.settings.phase_factor_random = leaves_phase
+leaves.settings.size_random = leaves_size
+
+leaves2.settings.count = leaves2_number
+leaves2.settings.phase_factor_random = leaves2_phase
+leaves2.settings.size_random = leaves2_size
+
+wood2.settings.count = wood2_number
+wood2.settings.phase_factor_random = wood2_phase
+wood2.settings.size_random = wood2_size
+
+wood_small.settings.count = wood_small_number
+wood_small.settings.phase_factor_random = wood_small_phase
+wood_small.settings.size_random = wood_small_size
+
+leaf_angle = random.uniform(1.75, 2.49)
+bpy.data.objects['3_leaf'].rotation_euler[2] = leaf_angle
+
+leaf2_angle = random.uniform(-2.85, -1.9)
+bpy.data.objects['3_leaf2'].rotation_euler[2] = leaf2_angle
+
